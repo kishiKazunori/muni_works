@@ -1,15 +1,13 @@
 <template>
-    <v-card class="mx-auto overflow-hidden" height="100">
-        <v-app-bar>
-            <v-app-bar-title-button>
-                <v-btn class="app-bar-title-button">muni work u</v-btn>
-            </v-app-bar-title-button>
-            <v-spacer></v-spacer>
-            <v-btn :to="content.value" v-for="content in contents" :key="content.value">
-                <span class="app-bar-button">{{ content.name }}</span>
-            </v-btn>
-        </v-app-bar>
-    </v-card>
+    <v-app-bar prominent>
+        <v-app-bar-title-button>
+            <v-btn class="app-bar-title-button">muni work u</v-btn>
+        </v-app-bar-title-button>
+        <v-spacer></v-spacer>
+        <v-btn :to="content.value" v-for="content in contents" :key="content.value">
+            <span class="app-bar-button">{{ content.name }}</span>
+        </v-btn>
+    </v-app-bar>
 </template>
 
 
@@ -21,6 +19,7 @@ export default defineComponent({
         const contents = ref([
             { name: "TOP", value: "/" },
             { name: "いし。", value: "/isiPage" },
+            { name: "u", value: "/uPage" },
             { name: "about", value: "/about" }
         ])
         return {
