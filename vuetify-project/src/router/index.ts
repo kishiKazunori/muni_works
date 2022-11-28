@@ -11,6 +11,11 @@ const routes: Array<RouteRecordRaw> = [
         name: 'isiPage',
         component: () => import('../views/ArtBookIsiPage.vue'),
       },
+      {
+        path: '/uPage',
+        name: 'uPage',
+        component: () => import('../views/ArtBookUuPage.vue'),
+      },
 ];
 
 const router = createRouter({
