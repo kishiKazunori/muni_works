@@ -10,7 +10,7 @@ import { VitePluginFonts } from 'vite-plugin-fonts' // 追加
 // https://vitejs.dev/config/
 export default defineConfig({
   // base: process.env.NODE_ENV === 'production' ? '/vuetify-project/' : './',
-  base: process.env.NODE_ENV === 'production' ? './' : './',
+  // base: process.env.NODE_ENV === 'production' ? './' : './',
   plugins: [
     vue(),
     VitePluginFonts({
