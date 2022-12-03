@@ -22,10 +22,11 @@
                     <v-icon icon="mdi-chevron-right" />
                 </v-btn>
             </template> -->
-                <v-carousel-item style="padding-bottom:10rem ;" v-for="(item, i) in imageItems" :key="i" :src="item.imageSrc">
+                <v-carousel-item style="padding-bottom:10rem;" v-for="(item, i) in imageItems" :key="i"
+                    :src="item.imageSrc">
                 </v-carousel-item>
             </v-carousel>
-            
+
         </v-overlay>
     </div>
 </template>
