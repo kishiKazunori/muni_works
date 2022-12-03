@@ -16,10 +16,12 @@
                         </v-img>
                     </v-col>
 
-                    <v-dialog close-delay="3" v-model="dialog" width="65vw" height="90vh" style="aspect-ratio: 16 / 8;" eager>
+                    <v-dialog close-delay="3" v-model="dialog" width="65vw" height="90vh" style="aspect-ratio: 16 / 8;"
+                        eager>
                         <v-card width="65vw" height="85vh" style="aspect-ratio: 16 / 8;">
-                            <v-carousel width="65vw" height="90vh" style="aspect-ratio: 16 / 8;" show-arrows="hover" hide-delimiters>
-                                <v-carousel-item  v-for="(item, i) in imageItems" :key="i">
+                            <v-carousel width="65vw" height="90vh" style="aspect-ratio: 16 / 8;" show-arrows="hover"
+                                hide-delimiters>
+                                <v-carousel-item v-for="(item, i) in imageItems" :key="i">
                                     <v-img :src="item.imageSrc"></v-img>
                                 </v-carousel-item>
                             </v-carousel>
@@ -35,7 +37,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import AppBarMenu from "../components/AppBarMenu.vue"
+import AppBarMenu from "../components/AppBarMenu.vue";
 import anime from 'animejs'
 export default defineComponent({
     components: {
