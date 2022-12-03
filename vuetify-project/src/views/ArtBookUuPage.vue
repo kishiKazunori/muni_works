@@ -1,39 +1,36 @@
 <template>
     <AppBarMenu />
-
     <v-main>
         <v-container fluid>
-            <v-row>
-                <v-col cols="4" class="d-flex child-flex" v-for="item in imageItems">
-                    <v-img :src="item.imageSrc" class="bg-grey-lighten-2 art-book-images" cover>
-                        <template v-slot:placeholder>
-                            <v-row class="fill-height ma-0" align="center" justify="center">
-                                <v-progress-circular indeterminate color="grey-lighten-5"></v-progress-circular>
-                            </v-row>
-                        </template>
-                    </v-img>
-                </v-col>
-            </v-row>
-            <v-overlay v-model="overlay" scroll-strategy="none" activator="parent" location-strategy="connected">
-                <div class="modal-window">
-                    <v-carousel height="70vh" show-arrows="hover" hide-delimiters>
-                        <template v-slot:prev="{ props }">
-                            <v-btn variant="elevated" style="art-book-cal-btn" @click="props.onClick">Previous slide</v-btn>
-                        </template>
-                        <v-carousel-item v-for="(item, i) in imageItems" :key="i">
-                            <v-img :src="item.imageSrc"></v-img>
-                        </v-carousel-item>
-                    </v-carousel>
-                </div>
-            </v-overlay>
+            <div class="d-flex justify-center">
+                <v-row>
+                    <v-col cols="4" class="d-flex child-flex" v-for="item in imageItems">
+                        <v-img @click="dialog = true" :src="item.imageSrc" class="bg-grey-lighten-2 art-book-images"
+                            cover>
+                            <template v-slot:placeholder>
+                                <v-row class="fill-height ma-0" align="center" justify="center">
+                                    <v-progress-circular indeterminate color="grey-lighten-5">
+                                    </v-progress-circular>
+                                </v-row>
+                            </template>
+                        </v-img>
+                    </v-col>
+
+                    <v-dialog close-delay="3" v-model="dialog" width="65vw" height="90vh" style="aspect-ratio: 16 / 8;" eager>
+                        <v-card width="65vw" height="85vh" style="aspect-ratio: 16 / 8;">
+                            <v-carousel width="65vw" height="90vh" style="aspect-ratio: 16 / 8;" show-arrows="hover" hide-delimiters>
+                                <v-carousel-item  v-for="(item, i) in imageItems" :key="i">
+                                    <v-img :src="item.imageSrc"></v-img>
+                                </v-carousel-item>
+                            </v-carousel>
+                        </v-card>
+                    </v-dialog>
+                </v-row>
+
+
+            </div>
         </v-container>
     </v-main>
-    <!-- <div v-show="isModalShow" class="modal-window" height="vh"> -->
-
-
-    <!---->
-
-    <!-- </div> -->
 </template>
 
 <script lang="ts">
@@ -45,15 +42,10 @@ export default defineComponent({
         AppBarMenu
     },
     setup() {
-        const isModalShow = ref(false)
-        const overlay = ref(false)
-        console.log(overlay.value);
-        const imageClickEvents = () => {
-            console.log(overlay.value);
-            overlay.value = !overlay.value
-            // isModalShow.value = !isModalShow.value
-            // console.log(isModalShow.value);
-        }
+        const dialog = ref(false)
+        // const imageClickEvents = (e: any): void => {
+        //     dialog.value = true
+        // }
         const imageItems = ref(
             [
                 { "ImageIndex": 0, "imageSrc": "../../u-ehon-image/1.png" },
@@ -93,10 +85,9 @@ export default defineComponent({
             });
         })
         return {
-            isModalShow,
             imageItems,
-            imageClickEvents,
-            overlay
+            dialog,
+            // imageClickEvents,
         }
     }
 });
@@ -106,13 +97,23 @@ export default defineComponent({
 
 
 <style  lang="scss" scoped>
-.modal-window {
-    display: flex;
-    justify-content: center;
-    width: 70vw;
-}
-.art-book-cal-btn{
-    position:absolute;
-    left: 20rem;
-}
+// .prev-button{
+//     background-color:rgba(0,0,0,0);
+//     border: none !important;
+//     height: 100%;
+//     width: 50%;
+//     position: absolute;
+//     left: 0;
+//     top: 0;
+// }
+// .next-button{
+//     background-color:rgba(0,0,0,0);
+//     border: none !important;
+//     height: 100%;
+//     width: 50%;
+//     position: absolute;
+//     right: 0;
+//     top: 0;
+// }
+// スマホ版の大きさを見る
 </style>
