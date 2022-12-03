@@ -1,6 +1,6 @@
 <template>
     <v-tabs v-model="tab" color="basil" grow>
-        <v-tab :to="item.value" class="menu-tab" v-for="item in items" :key="item" :value="item">
+        <v-tab :to="item.value" class="menu-tab" v-for="item in items" :key="item.name" :value="item">
             {{ item.name }}
         </v-tab>
     </v-tabs>
