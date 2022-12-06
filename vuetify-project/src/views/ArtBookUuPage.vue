@@ -16,11 +16,17 @@
                         </v-img>
                     </v-col>
 
-                    <v-dialog close-delay="3" v-model="dialog" width="65vw" height="90vh" style="aspect-ratio: 16 / 8;"
-                        eager>
-                        <v-card width="65vw" height="85vh" style="aspect-ratio: 16 / 8;">
-                            <v-carousel width="65vw" height="90vh" style="aspect-ratio: 16 / 8;" show-arrows="hover"
-                                hide-delimiters>
+          <v-dialog
+            v-if="isPcView"
+            close-delay="3"
+            v-model="dialog"
+            width="65vw"
+            height="90vh"
+            style="aspect-ratio: 16 / 8"
+            eager
+          >
+            <v-card height="85vh" style="aspect-ratio: 16 / 8">
+              <v-carousel height="90vh" show-arrows="hover" hide-delimiters>
                                 <v-carousel-item v-for="(item, i) in imageItems" :key="i">
                                     <v-img :src="item.imageSrc"></v-img>
                                 </v-carousel-item>
@@ -36,9 +42,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import AppBarMenu from "../components/AppBarMenu.vue";
-import anime from 'animejs'
+import ImageSwiper from "../components/ImageSwiper.vue";
+import anime from "animejs";
 export default defineComponent({
     components: {
         AppBarMenu
