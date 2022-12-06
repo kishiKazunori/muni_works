@@ -44,61 +44,76 @@ export default defineComponent({
         AppBarMenu
     },
     setup() {
-        const dialog = ref(false)
-        // const imageClickEvents = (e: any): void => {
-        //     dialog.value = true
-        // }
-        const imageItems = ref(
-            [
-                { "ImageIndex": 0, "imageSrc": "../../u-ehon-image/1-min.png" },
-                { "ImageIndex": 1, "imageSrc": "../../u-ehon-image/2-min.png" },
-                { "ImageIndex": 2, "imageSrc": "../../u-ehon-image/3-min.png" },
-                { "ImageIndex": 3, "imageSrc": "../../u-ehon-image/4-min.png" },
-                { "ImageIndex": 4, "imageSrc": "../../u-ehon-image/5-min.png" },
-                { "ImageIndex": 5, "imageSrc": "../../u-ehon-image/6-min.png" },
-                { "ImageIndex": 6, "imageSrc": "../../u-ehon-image/7-min.png" },
-                { "ImageIndex": 7, "imageSrc": "../../u-ehon-image/8-min.png" },
-                { "ImageIndex": 8, "imageSrc": "../../u-ehon-image/9-min.png" },
-                { "ImageIndex": 9, "imageSrc": "../../u-ehon-image/10-min.png" },
-                { "ImageIndex": 10, "imageSrc": "../../u-ehon-image/11-min.png" },
-                { "ImageIndex": 11, "imageSrc": "../../u-ehon-image/12-min.png" },
-                { "ImageIndex": 12, "imageSrc": "../../u-ehon-image/13-min.png" },
-                { "ImageIndex": 13, "imageSrc": "../../u-ehon-image/14-min.png" },
-                { "ImageIndex": 14, "imageSrc": "../../u-ehon-image/15-min.png" },
-                { "ImageIndex": 15, "imageSrc": "../../u-ehon-image/16-min.png" },
-                { "ImageIndex": 16, "imageSrc": "../../u-ehon-image/17-min.png" },
-                { "ImageIndex": 17, "imageSrc": "../../u-ehon-image/18-min.png" },
-                { "ImageIndex": 18, "imageSrc": "../../u-ehon-image/19-min.png" },
-                { "ImageIndex": 19, "imageSrc": "../../u-ehon-image/20-min.png" },
-                { "ImageIndex": 20, "imageSrc": "../../u-ehon-image/21-min.png" },
-                { "ImageIndex": 21, "imageSrc": "../../u-ehon-image/22-min.png" },
-                { "ImageIndex": 22, "imageSrc": "../../u-ehon-image/23-min.png" },
-                { "ImageIndex": 23, "imageSrc": "../../u-ehon-image/24-min.png" },
-                { "ImageIndex": 24, "imageSrc": "../../u-ehon-image/25-min.png" }
-            ]
-        )
+    const dialog = ref(false);
+    const overlay = ref(false);
+    const windowSize = ref(window.innerWidth);
+    const isPcView = computed(() => {
+      return windowSize.value >= 990;
+    });
+
+    const gridImgClick = () => {
+      if (isPcView.value) {
+        dialog.value = !dialog.value;
+      } else {
+        overlay.value = true;
+      }
+    };
+
+    const overlayHide = () => {
+      overlay.value = false;
+      console.log(overlay.value);
+    };
+
+    const imageItems = ref([
+      { ImageIndex: 0, imageSrc: "../../u-ehon-image/1.jpg" },
+      { ImageIndex: 1, imageSrc: "../../u-ehon-image/2.jpg" },
+      { ImageIndex: 2, imageSrc: "../../u-ehon-image/3.jpg" },
+      { ImageIndex: 3, imageSrc: "../../u-ehon-image/4.jpg" },
+      { ImageIndex: 4, imageSrc: "../../u-ehon-image/5.jpg" },
+      { ImageIndex: 5, imageSrc: "../../u-ehon-image/6.jpg" },
+      { ImageIndex: 6, imageSrc: "../../u-ehon-image/7.jpg" },
+      { ImageIndex: 7, imageSrc: "../../u-ehon-image/8.jpg" },
+      { ImageIndex: 8, imageSrc: "../../u-ehon-image/9.jpg" },
+      { ImageIndex: 9, imageSrc: "../../u-ehon-image/10.jpg" },
+      { ImageIndex: 10, imageSrc: "../../u-ehon-image/11.jpg" },
+      { ImageIndex: 11, imageSrc: "../../u-ehon-image/12.jpg" },
+      { ImageIndex: 12, imageSrc: "../../u-ehon-image/13.jpg" },
+      { ImageIndex: 13, imageSrc: "../../u-ehon-image/14.jpg" },
+      { ImageIndex: 14, imageSrc: "../../u-ehon-image/15.jpg" },
+      { ImageIndex: 15, imageSrc: "../../u-ehon-image/16.jpg" },
+      { ImageIndex: 16, imageSrc: "../../u-ehon-image/17.jpg" },
+      { ImageIndex: 17, imageSrc: "../../u-ehon-image/18.jpg" },
+      { ImageIndex: 18, imageSrc: "../../u-ehon-image/19.jpg" },
+      { ImageIndex: 19, imageSrc: "../../u-ehon-image/20.jpg" },
+      { ImageIndex: 20, imageSrc: "../../u-ehon-image/21.jpg" },
+      { ImageIndex: 21, imageSrc: "../../u-ehon-image/22.jpg" },
+      { ImageIndex: 22, imageSrc: "../../u-ehon-image/23.jpg" },
+      { ImageIndex: 23, imageSrc: "../../u-ehon-image/24.jpg" },
+      { ImageIndex: 24, imageSrc: "../../u-ehon-image/25.jpg" },
+    ]);
         onMounted(() => {
             anime({
-                targets: '.art-book-images',
-                opacity: ['0%', '30%', '60%', '100%'],
-                easing: 'easeInQuad',
+        targets: ".art-book-images",
+        opacity: ["0%", "30%", "60%", "100%"],
+        easing: "easeInQuad",
                 translateY: -5,
-                delay: anime.stagger(200)
+        delay: anime.stagger(200),
             });
-        })
+    });
         return {
             imageItems,
             dialog,
+      isPcView,
+      overlay,
+      gridImgClick,
+      overlayHide,
             // imageClickEvents,
-        }
-    }
+    };
+  },
 });
-
-
 </script>
 
-
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 // .prev-button{
 //     background-color:rgba(0,0,0,0);
 //     border: none !important;
@@ -118,4 +133,11 @@ export default defineComponent({
 //     top: 0;
 // }
 // スマホ版の大きさを見る
+
+.mobile-image-slider {
+}
+
+// @media (max-width: 767px) {
+
+// }
 </style>
