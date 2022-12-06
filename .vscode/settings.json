@@ -2,7 +2,10 @@
     "cSpell.words": [
         "animejs",
         "ehon",
+        "fontface",
         "muni",
-        "vuetify"
+        "roboto",
+        "vuetify",
+        "webfontloader"
     ]
 }
