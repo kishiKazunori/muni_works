@@ -1,6 +1,13 @@
 <template>
   <v-app-bar prominent>
+    <v-app-bar-title class="app-bar-title">muni work u</v-app-bar-title>
+    <v-btn
       class="app-bar-links"
+      :to="content.value"
+      v-for="content in linkContents"
+      :key="content.value"
+    >
+      <span>{{ content.name }}</span>
     </v-btn>
   </v-app-bar>
 </template>
