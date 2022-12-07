@@ -1,9 +1,6 @@
 <template>
   <v-app-bar prominent>
-    <v-btn class="app-bar-title-button">muni work u</v-btn>
-    <v-spacer></v-spacer>
-    <v-btn :to="content.value" v-for="content in contents" :key="content.value">
-      <span class="app-bar-button">{{ content.name }}</span>
+      class="app-bar-links"
     </v-btn>
   </v-app-bar>
 </template>
