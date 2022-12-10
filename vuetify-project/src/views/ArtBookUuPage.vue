@@ -1,123 +1,130 @@
 <template>
-    <AppBarMenu />
-    <v-main>
-        <v-container fluid>
-            <div class="d-flex justify-center">
-                <v-row>
-                    <v-col cols="4" class="d-flex child-flex" v-for="item in imageItems">
-                        <v-img @click="dialog = true" :src="item.imageSrc" class="bg-grey-lighten-2 art-book-images"
-                            cover>
-                            <template v-slot:placeholder>
-                                <v-row class="fill-height ma-0" align="center" justify="center">
-                                    <v-progress-circular indeterminate color="grey-lighten-5">
-                                    </v-progress-circular>
-                                </v-row>
-                            </template>
-                        </v-img>
-                    </v-col>
-
-          <v-dialog
+  <AppBarMenu />
+  <v-main>
+    <v-container fluid>
+      <div class="d-flex justify-center">
+        <v-row>
+          <ImageGrid
+            v-model:imageGridItems="computePageItems"
+            @gridImageClick="gridImageClick"
+          />
+          <ImageDialogCarousel
             v-if="isPcView"
-            close-delay="3"
-            v-model="dialog"
-            width="65vw"
-            height="90vh"
-            style="aspect-ratio: 16 / 8"
-            eager
-          >
-            <v-card height="85vh" style="aspect-ratio: 16 / 8">
-              <v-carousel height="90vh" show-arrows="hover" hide-delimiters>
-                                <v-carousel-item v-for="(item, i) in imageItems" :key="i">
-                                    <v-img :src="item.imageSrc"></v-img>
-                                </v-carousel-item>
-                            </v-carousel>
-                        </v-card>
-                    </v-dialog>
-                </v-row>
-
-
-            </div>
-        </v-container>
-    </v-main>
+            :isDialog="isDialog"
+            :carouselImageItem="computePageItems"
+            :selectedImageNumber="selectedImageNumber"
+            @outsideDialogClick="changeIsDialogValue"
+            @clickCarouselController="changeSelectedImageNumber"
+          />
+          <ImageOverlay
+            v-else
+            :isOverlay="isOverlay"
+            :swiperImageItems="computePageItems"
+            :selectedImageNumber="selectedImageNumber"
+            @changeIsOverlay="changeIsOverlayValue"
+          />
+        </v-row>
+      </div>
+    </v-container>
+  </v-main>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+<script setup lang="ts">
+import { computed, reactive, onMounted, ref } from "vue";
 import AppBarMenu from "../components/AppBarMenu.vue";
-import ImageSwiper from "../components/ImageSwiper.vue";
+import ImageGrid from "../components/ImageGrid.vue";
+import ImageDialogCarousel from "../components/ImageDialogCarousel.vue";
+import ImageOverlay from "../components/ImageOverlay.vue";
 import anime from "animejs";
-export default defineComponent({
-    components: {
-        AppBarMenu
-    },
-    setup() {
-    const dialog = ref(false);
-    const overlay = ref(false);
-    const windowSize = ref(window.innerWidth);
-    const isPcView = computed(() => {
-      return windowSize.value >= 990;
-    });
-
-    const gridImgClick = () => {
-      if (isPcView.value) {
-        dialog.value = !dialog.value;
-      } else {
-        overlay.value = true;
-      }
-    };
-
-    const overlayHide = () => {
-      overlay.value = false;
-      console.log(overlay.value);
-    };
-
-    const imageItems = ref([
-      { ImageIndex: 0, imageSrc: "../../u-ehon-image/1.jpg" },
-      { ImageIndex: 1, imageSrc: "../../u-ehon-image/2.jpg" },
-      { ImageIndex: 2, imageSrc: "../../u-ehon-image/3.jpg" },
-      { ImageIndex: 3, imageSrc: "../../u-ehon-image/4.jpg" },
-      { ImageIndex: 4, imageSrc: "../../u-ehon-image/5.jpg" },
-      { ImageIndex: 5, imageSrc: "../../u-ehon-image/6.jpg" },
-      { ImageIndex: 6, imageSrc: "../../u-ehon-image/7.jpg" },
-      { ImageIndex: 7, imageSrc: "../../u-ehon-image/8.jpg" },
-      { ImageIndex: 8, imageSrc: "../../u-ehon-image/9.jpg" },
-      { ImageIndex: 9, imageSrc: "../../u-ehon-image/10.jpg" },
-      { ImageIndex: 10, imageSrc: "../../u-ehon-image/11.jpg" },
-      { ImageIndex: 11, imageSrc: "../../u-ehon-image/12.jpg" },
-      { ImageIndex: 12, imageSrc: "../../u-ehon-image/13.jpg" },
-      { ImageIndex: 13, imageSrc: "../../u-ehon-image/14.jpg" },
-      { ImageIndex: 14, imageSrc: "../../u-ehon-image/15.jpg" },
-      { ImageIndex: 15, imageSrc: "../../u-ehon-image/16.jpg" },
-      { ImageIndex: 16, imageSrc: "../../u-ehon-image/17.jpg" },
-      { ImageIndex: 17, imageSrc: "../../u-ehon-image/18.jpg" },
-      { ImageIndex: 18, imageSrc: "../../u-ehon-image/19.jpg" },
-      { ImageIndex: 19, imageSrc: "../../u-ehon-image/20.jpg" },
-      { ImageIndex: 20, imageSrc: "../../u-ehon-image/21.jpg" },
-      { ImageIndex: 21, imageSrc: "../../u-ehon-image/22.jpg" },
-      { ImageIndex: 22, imageSrc: "../../u-ehon-image/23.jpg" },
-      { ImageIndex: 23, imageSrc: "../../u-ehon-image/24.jpg" },
-      { ImageIndex: 24, imageSrc: "../../u-ehon-image/25.jpg" },
-    ]);
-        onMounted(() => {
-            anime({
-        targets: ".art-book-images",
-        opacity: ["0%", "30%", "60%", "100%"],
-        easing: "easeInQuad",
-                translateY: -5,
-        delay: anime.stagger(200),
-            });
-    });
-        return {
-            imageItems,
-            dialog,
-      isPcView,
-      overlay,
-      gridImgClick,
-      overlayHide,
-            // imageClickEvents,
-    };
-  },
+import { useRoute } from "vue-router";
+onMounted(() => {
+  anime({
+    targets: ".art-book-images",
+    opacity: ["0%", "30%", "60%", "100%"],
+    easing: "easeInQuad",
+    translateY: -5,
+    delay: anime.stagger(200),
+  });
 });
+// data
+const isOverlay = ref(false);
+const windowSize = ref(window.innerWidth);
+const selectedImageNumber = ref(0);
+const isDialog = ref(false);
+const route = useRoute();
+const ehonName = ref(route.params.name);
+const imageItemPaths = reactive<object[]>([]);
+
+const computePageItems = computed(() => {
+  if (ehonName.value === ":u-page") {
+    createPageItemPaths("u-ehon-image", 24);
+  } else if (ehonName.value === ":isi-page") {
+    createPageItemPaths("isi-ehon-image", 29);
+  }
+  return imageItemPaths
+});
+
+const createPageItemPaths = (ehonName: string, lastPageIndex: number) => {
+  for (let i = 0; i < lastPageIndex; i++) {
+    // 値が 0 から 4 まで計 5 回実行される
+    imageItemPaths.push({
+      imageIndex: i,
+      imageSrc: `../../${ehonName}/${i + 1}.jpg`,
+    });
+  }
+};
+const imageItems = ref([
+  { imageIndex: 0, imageSrc: "../../u-ehon-image/1.jpg" },
+  { imageIndex: 1, imageSrc: "../../u-ehon-image/2.jpg" },
+  { imageIndex: 2, imageSrc: "../../u-ehon-image/3.jpg" },
+  { imageIndex: 3, imageSrc: "../../u-ehon-image/4.jpg" },
+  { imageIndex: 4, imageSrc: "../../u-ehon-image/5.jpg" },
+  { imageIndex: 5, imageSrc: "../../u-ehon-image/6.jpg" },
+  { imageIndex: 6, imageSrc: "../../u-ehon-image/7.jpg" },
+  { imageIndex: 7, imageSrc: "../../u-ehon-image/8.jpg" },
+  { imageIndex: 8, imageSrc: "../../u-ehon-image/9.jpg" },
+  { imageIndex: 9, imageSrc: "../../u-ehon-image/10.jpg" },
+  { imageIndex: 10, imageSrc: "../../u-ehon-image/11.jpg" },
+  { imageIndex: 11, imageSrc: "../../u-ehon-image/12.jpg" },
+  { imageIndex: 12, imageSrc: "../../u-ehon-image/13.jpg" },
+  { imageIndex: 13, imageSrc: "../../u-ehon-image/14.jpg" },
+  { imageIndex: 14, imageSrc: "../../u-ehon-image/15.jpg" },
+  { imageIndex: 15, imageSrc: "../../u-ehon-image/16.jpg" },
+  { imageIndex: 16, imageSrc: "../../u-ehon-image/17.jpg" },
+  { imageIndex: 17, imageSrc: "../../u-ehon-image/18.jpg" },
+  { imageIndex: 18, imageSrc: "../../u-ehon-image/19.jpg" },
+  { imageIndex: 19, imageSrc: "../../u-ehon-image/20.jpg" },
+  { imageIndex: 20, imageSrc: "../../u-ehon-image/21.jpg" },
+  { imageIndex: 21, imageSrc: "../../u-ehon-image/22.jpg" },
+  { imageIndex: 22, imageSrc: "../../u-ehon-image/23.jpg" },
+  { imageIndex: 23, imageSrc: "../../u-ehon-image/24.jpg" },
+  { imageIndex: 24, imageSrc: "../../u-ehon-image/25.jpg" },
+]);
+
+// computed
+const isPcView = computed(() => {
+  return windowSize.value >= 990;
+});
+
+const gridImageClick = (selectedId: number) => {
+  selectedImageNumber.value = selectedId;
+  if (isPcView.value) {
+    isDialog.value = true;
+  } else {
+    isOverlay.value = true;
+  }
+};
+const changeSelectedImageNumber = (newNumber: number) => {
+  selectedImageNumber.value = newNumber;
+};
+
+const changeIsDialogValue = (newDialogVal: boolean) => {
+  isDialog.value = newDialogVal;
+};
+
+const changeIsOverlayValue = (newVal: boolean) => {
+  isOverlay.value = newVal;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -140,11 +147,14 @@ export default defineComponent({
 //     top: 0;
 // }
 // スマホ版の大きさを見る
-
-.mobile-image-slider {
-}
-
+// @media all and (min-width: 768px) and (max-width: 1024px) {
+// }
+// .mobile-image-slider {
+//   width: 80vw;
+// }
 // @media (max-width: 767px) {
-
+//   .mobile-image-slider {
+//     width: 100vw;
+//   }
 // }
 </style>
