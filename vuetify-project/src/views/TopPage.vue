@@ -3,7 +3,7 @@
       <v-main>
         <HomeImg />
         <LogoText class="logo-text-position"/>
-        <MenuBar />
+        <TopPageMenuBar />
       </v-main>
     </v-app>
   </template>
@@ -11,7 +11,7 @@
   <script setup lang="ts">
   import HomeImg from '../components/HomeImg.vue';
   import LogoText from '../components/LogoText.vue';
-  import MenuBar from '../components/MenuBar.vue';
+  import TopPageMenuBar from '../components/TopPageMenuBar.vue';
   </script>
   
   <style  lang="css" >
