@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import ArtBookUuPage from "../views/ArtBookUuPage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -7,14 +8,10 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/TopPage.vue'),
   },
   {
-    path: '/isiPage',
-    name: 'isiPage',
-    component: () => import('../views/ArtBookIsiPage.vue'),
-  },
-  {
-    path: '/uPage',
-    name: 'uPage',
-    component: () => import('../views/ArtBookUuPage.vue'),
+    path: '/ehon:name',
+    name: 'ehon',
+    component: () => ArtBookUuPage,
+    props: true
   },
   {
     path: '/about',

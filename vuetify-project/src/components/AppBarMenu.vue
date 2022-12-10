@@ -17,8 +17,8 @@ import { reactive } from "vue";
 
 const linkContents: any = reactive([
   { name: "TOP", value: "/" },
-  { name: "いし。", value: "/isiPage" },
-  { name: "u", value: "/uPage" },
+  { name: "いし。", value: "/ehon:isi-page" },
+  { name: "u", value: "/ehon:u-page" },
   { name: "about", value: "/about" },
 ]);
 </script>
