@@ -8,7 +8,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/TopPage.vue'),
   },
   {
-    path: '/ehon:name',
+    path: '/ehon/:name',
     name: 'ehon',
     component: () => ArtBookUuPage,
     props: true
