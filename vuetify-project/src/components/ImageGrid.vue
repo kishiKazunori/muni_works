@@ -1,5 +1,10 @@
 <template>
-  <v-col cols="4" class="d-flex child-flex" v-for="item in imageGridItems" :key="item.imageIndex">
+  <v-col
+    :cols="setColValue"
+    class="d-flex child-flex"
+    v-for="item in imageGridItems"
+    :key="item.imageSrc"
+  >
     <v-img
       @click="imageSelectedAction(item.imageIndex)"
       :src="item.imageSrc"
@@ -16,14 +21,39 @@
   </v-col>
 </template>
 <script setup lang="ts">
+import { computed, onUpdated } from "vue";
+import anime from "animejs";
+
 // Props
 const props = defineProps<{
   imageGridItems: any;
+  ehonName: any;
 }>();
+
+const setColValue = computed({
+  get: () => {
+    if (props.ehonName === ":isi-page") {
+      return 3;
+    } else {
+      return 4;
+    }
+  },
+  set: (newNumber) => {},
+});
 
 const emit = defineEmits<{
   (e: "gridImageClick", val: number): void;
 }>();
 const imageSelectedAction = (selectedId: number) =>
   emit("gridImageClick", selectedId);
+
+onUpdated(() => {
+  anime({
+    targets: ".art-book-images",
+    opacity: ["0%", "30%", "60%", "100%"],
+    easing: "easeInQuad",
+    translateY: -5,
+    delay: anime.stagger(200),
+  });
+});
 </script>
