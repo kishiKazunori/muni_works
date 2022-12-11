@@ -14,8 +14,7 @@
   import TopPageMenuBar from '../components/TopPageMenuBar.vue';
   </script>
   
-  <style  lang="css" >
-
+  <style  lang="scss" >
   .logo-text-position{
     position: absolute;
       top: 30vw;
