@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import ArtBookPage from "../views/ArtBookPage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/ehon/:name',
     name: 'ehon',
-    component: () => ArtBookPage,
+    component: () => import('../views/ArtBookPage.vue'),
     props: true
   },
   {
