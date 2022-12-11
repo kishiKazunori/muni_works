@@ -1,9 +1,9 @@
 <template>
-  <v-overlay
-    v-model="isOverlayShow"
-    class="d-flex align-center justify-center"
-  >
+  <v-overlay v-model="isOverlayShow" class="d-flex align-center justify-center">
     <div class="mobile-image-slider">
+      <!-- <v-btn @click="closeButtonClick">
+        <v-icon class="image-close-icon"> mdi-close-circle-outline</v-icon>
+      </v-btn> -->
       <ImageSwiper
         :swiperImageItems="swiperImageItems"
         :selectedImageNumber="selectedImageNumber"
@@ -56,15 +56,15 @@ const isOverlayShow = computed({
 // PC
 @media screen and (max-width: 979px) {
   .mobile-image-slider {
-    width: 80vw;
-    height: 100vh;
+    width: 60vw;
+    height: 80%;
   }
 }
 // tablet
 @media screen and (max-width: 767px) {
   .mobile-image-slider {
-    width: 80vw;
-    height: auto;
+    width: 55vw;
+    height: 80%;
   }
 }
 // mobile
@@ -73,5 +73,11 @@ const isOverlayShow = computed({
     width: 100vw;
     height: auto;
   }
+}
+.image-close-icon {
+  position: absolute;
+  right: 0px;
+  top: -30px;
+  z-index: 99;
 }
 </style>
