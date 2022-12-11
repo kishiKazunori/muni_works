@@ -1,29 +1,58 @@
 <template>
   <v-app-bar prominent>
     <v-app-bar-title class="app-bar-title">muni work u</v-app-bar-title>
-    <v-btn
-      class="app-bar-links"
-      :to="content.value"
-      v-for="content in linkContents"
-      :key="content.value"
-    >
-      <span>{{ content.name }}</span>
-    </v-btn>
+    <template v-slot:append>
+      <v-app-bar-nav-icon
+        variant="text"
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
+    </template>
   </v-app-bar>
+  <v-navigation-drawer app dark v-model="drawer" location="right">
+    <v-list>
+      <v-list-item
+        v-for="link in linkContents"
+        :key="link.title"
+        :title="link.title"
+        :to="link.value"
+      ></v-list-item>
+      <v-list-group value="ehon">
+        <template v-slot:activator="{ props }">
+          <v-list-item v-bind="props" title="絵本"></v-list-item>
+        </template>
+        <v-list-item
+          v-for="ehonLink in ehonLinkItems"
+          :key="ehonLink.title"
+          :title="ehonLink.title"
+          :to="ehonLink.value"
+        ></v-list-item>
+      </v-list-group>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
-
-const linkContents: any = reactive([
-  { name: "TOP", value: "/" },
-  { name: "いし。", value: "/ehon:isi-page" },
-  { name: "u", value: "/ehon:u-page" },
-  { name: "about", value: "/about" },
+import { reactive, ref } from "vue";
+import TopPageMenuBar from "../components/TopPageMenuBar.vue";
+interface LinkItems {
+  title: string;
+  value: string;
+}
+const linkContents: LinkItems[] = reactive([
+  { title: "TOP", value: "/" },
+  { title: "about", value: "/about" },
 ]);
+const ehonLinkItems: LinkItems[] = [
+  { title: "u", value: "/ehon/:u-page" },
+  { title: "いし。", value: "/ehon/:isi-page" },
+];
+const drawer = ref(false);
 </script>
 
 <style lang="scss" scoped>
+.nav-list-item-style {
+  font-family: "Zen Old Mincho", sans-serif;
+}
 .v-toolbar-title__placeholder {
   overflow: initial !important;
 }
