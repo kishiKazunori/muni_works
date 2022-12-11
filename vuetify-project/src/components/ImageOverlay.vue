@@ -1,11 +1,7 @@
 <template>
   <v-overlay
     v-model="isOverlayShow"
-    style="
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    "
+    class="d-flex align-center justify-center"
   >
     <div class="mobile-image-slider">
       <ImageSwiper
@@ -28,9 +24,7 @@ const props = defineProps<{
 }>();
 const emit = defineEmits<{
   (e: "changeIsOverlay", val: boolean): void;
-  //   (e: "changeOverlayHide", val: string): void;
 }>();
-// const overlayHide = emit("changeOverlayHide", "outsideClick");
 
 const isOverlayShow = computed({
   get: () => props.isOverlay,
@@ -58,15 +52,26 @@ const isOverlayShow = computed({
 //     right: 0;
 //     top: 0;
 // }
-// スマホ版の大きさを見る
-@media all and (min-width: 768px) and (max-width: 1024px) {
+
+// PC
+@media screen and (max-width: 979px) {
+  .mobile-image-slider {
+    width: 80vw;
+    height: 100vh;
+  }
 }
-.mobile-image-slider {
-  width: 80vw;
+// tablet
+@media screen and (max-width: 767px) {
+  .mobile-image-slider {
+    width: 80vw;
+    height: auto;
+  }
 }
-@media (max-width: 767px) {
+// mobile
+@media screen and (max-width: 479px) {
   .mobile-image-slider {
     width: 100vw;
+    height: auto;
   }
 }
 </style>
