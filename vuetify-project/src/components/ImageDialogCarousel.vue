@@ -1,16 +1,9 @@
 <template>
-  <v-dialog
-    close-delay="3"
-    v-model="isDialogShow"
-    width="65vw"
-    height="90vh"
-    style="aspect-ratio: 16 / 8"
-    eager
-  >
-    <v-card height="85vh" style="aspect-ratio: 16 / 8">
+  <v-dialog close-delay="3" v-model="isDialogShow" height="85vh" eager>
+    <v-card>
       <v-carousel
         v-model="nowPage"
-        height="90vh"
+        height="85vh"
         show-arrows="hover"
         hide-delimiters
       >
@@ -56,3 +49,8 @@ const isDialogShow = computed({
   },
 });
 </script>
+<style lang="scss" scoped>
+// .v-dialog .v-overlay__content > .v-card {
+//   background-color: w;
+// }
+</style>
