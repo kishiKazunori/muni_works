@@ -94,7 +94,6 @@ const changeIsDialogValue = (newDialogVal: boolean) => {
   isDialog.value = newDialogVal;
 };
 const changeIsOverlayValue = (newVal: boolean) => {
-  console.log(isOverlay.value);
   isOverlay.value = newVal;
 };
 const closeOverlay = () => {
