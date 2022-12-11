@@ -1,6 +1,8 @@
 <template>
   <v-app-bar prominent>
-    <v-app-bar-title class="app-bar-title">muni work u</v-app-bar-title>
+    <v-app-bar-title class="app-bar-title"> 
+      <v-btn class="pa-0 text-h5" link to="/">muni works</v-btn>
+    </v-app-bar-title>
     <template v-slot:append>
       <v-app-bar-nav-icon
         variant="text"
@@ -9,8 +11,8 @@
     </template>
   </v-app-bar>
   <v-navigation-drawer app dark v-model="drawer" location="right">
-    <v-list>
-      <v-list-item
+    <v-list class="nav-list-item-style">
+      <v-list-item 
         v-for="link in linkContents"
         :key="link.title"
         :title="link.title"
@@ -52,25 +54,11 @@ const drawer = ref(false);
 <style lang="scss" scoped>
 .nav-list-item-style {
   font-family: "Zen Old Mincho", sans-serif;
+  
 }
-.v-toolbar-title__placeholder {
-  overflow: initial !important;
-}
-.app-bar-links {
-  font-size: 1em;
-  font-family: "Zen Old Mincho", sans-serif;
-}
-
 @media screen and (max-width: 767px) {
-  .app-bar-title {
-    font-size: 0.5em;
-    width: 50vw !important;
-  }
-  .app-bar-links {
-    font-size: 1px;
-    margin: 0 !important;
-    padding: 0;
-    font-family: "Zen Old Mincho", sans-serif;
-  }
 }
+// .v-toolbar-title__placeholder {
+//   overflow: initial !important;
+// }
 </style>
