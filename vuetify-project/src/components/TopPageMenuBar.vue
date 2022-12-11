@@ -1,16 +1,10 @@
 <template>
-  <v-tabs
-    text-h1
-    height="10vh"
-    v-model="selectedTab"
-    grow
-    class="font-weight-bold tabs-style"
-  >
+  <v-tabs text-h1 height="10vh" v-model="selectedTab" grow class="tabs-style">
     <v-menu>
       <template v-slot:activator="{ props }">
         <v-btn
           class="align-self-center"
-          height="100%"
+          height="99%"
           width="50vw"
           v-bind="props"
         >
@@ -18,7 +12,6 @@
           <v-icon end>mdi-menu-down</v-icon>
         </v-btn>
       </template>
-
       <v-list class="bg-grey-lighten-3">
         <v-list-item
           class="menu-list-item-style"
@@ -47,17 +40,17 @@ import { reactive, ref } from "vue";
 const selectedTab = ref("about");
 const tabLinkItems: any = reactive([
   {
-    value: "/aboutPage",
+    value: "/about",
     name: "about",
   },
 ]);
 const menuItems: any = reactive([
   {
-    value: "/ehon:isi-page",
+    value: "/ehon/:isi-page",
     name: "「いし。」",
   },
   {
-    value: "/ehon:u-page",
+    value: "/ehon/:u-page",
     name: "「u」",
   },
 ]);
