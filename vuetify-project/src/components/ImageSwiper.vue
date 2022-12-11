@@ -1,5 +1,4 @@
 <template>
-  <v-icon class="image-close-icon">mdi-close-circle-outline</v-icon>
   <swiper
     :slides-per-view="1"
     :space-between="15"
@@ -28,7 +27,6 @@ const props = defineProps<{
 }>();
 
 // data
-
 const myPaginationStyle = {
   clickable: true,
   PaginationOptions: { type: "fraction" },
@@ -44,11 +42,4 @@ const modules = [Pagination];
 // };
 </script>
 
-<style lang="scss">
-.image-close-icon {
-  position: absolute;
-  right: 0px;
-  top: -30px;
-  z-index: 99;
-}
-</style>
+<style lang="scss"></style>
