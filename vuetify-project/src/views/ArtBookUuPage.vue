@@ -7,6 +7,7 @@
           <ImageGrid
             v-model:imageGridItems="computePageItems"
             @gridImageClick="gridImageClick"
+            :ehonName="nowEhonName"
           />
           <ImageDialogCarousel
             v-if="isPcView"
@@ -30,40 +31,40 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, onMounted, ref } from "vue";
+import { computed, reactive, ref, toRef } from "vue";
 import AppBarMenu from "../components/AppBarMenu.vue";
 import ImageGrid from "../components/ImageGrid.vue";
 import ImageDialogCarousel from "../components/ImageDialogCarousel.vue";
 import ImageOverlay from "../components/ImageOverlay.vue";
-import anime from "animejs";
-import { useRoute } from "vue-router";
-onMounted(() => {
-  anime({
-    targets: ".art-book-images",
-    opacity: ["0%", "30%", "60%", "100%"],
-    easing: "easeInQuad",
-    translateY: -5,
-    delay: anime.stagger(200),
-  });
+
+const props = defineProps({
+  name: String,
 });
+
 // data
 const isOverlay = ref(false);
 const windowSize = ref(window.innerWidth);
 const selectedImageNumber = ref(0);
 const isDialog = ref(false);
-const route = useRoute();
-const ehonName = ref(route.params.name);
+const nowEhonName = toRef(props, "name");
 const imageItemPaths = reactive<object[]>([]);
 
+// computed
 const computePageItems = computed(() => {
-  if (ehonName.value === ":u-page") {
+  if (nowEhonName.value === ":u-page") {
+    imageItemPaths.splice(0);
     createPageItemPaths("u-ehon-image", 24);
-  } else if (ehonName.value === ":isi-page") {
+  } else if (nowEhonName.value === ":isi-page") {
+    imageItemPaths.splice(0);
     createPageItemPaths("isi-ehon-image", 29);
   }
-  return imageItemPaths
+  return imageItemPaths;
+});
+const isPcView = computed(() => {
+  return windowSize.value >= 990;
 });
 
+// methods
 const createPageItemPaths = (ehonName: string, lastPageIndex: number) => {
   for (let i = 0; i < lastPageIndex; i++) {
     // 値が 0 から 4 まで計 5 回実行される
@@ -73,39 +74,6 @@ const createPageItemPaths = (ehonName: string, lastPageIndex: number) => {
     });
   }
 };
-const imageItems = ref([
-  { imageIndex: 0, imageSrc: "../../u-ehon-image/1.jpg" },
-  { imageIndex: 1, imageSrc: "../../u-ehon-image/2.jpg" },
-  { imageIndex: 2, imageSrc: "../../u-ehon-image/3.jpg" },
-  { imageIndex: 3, imageSrc: "../../u-ehon-image/4.jpg" },
-  { imageIndex: 4, imageSrc: "../../u-ehon-image/5.jpg" },
-  { imageIndex: 5, imageSrc: "../../u-ehon-image/6.jpg" },
-  { imageIndex: 6, imageSrc: "../../u-ehon-image/7.jpg" },
-  { imageIndex: 7, imageSrc: "../../u-ehon-image/8.jpg" },
-  { imageIndex: 8, imageSrc: "../../u-ehon-image/9.jpg" },
-  { imageIndex: 9, imageSrc: "../../u-ehon-image/10.jpg" },
-  { imageIndex: 10, imageSrc: "../../u-ehon-image/11.jpg" },
-  { imageIndex: 11, imageSrc: "../../u-ehon-image/12.jpg" },
-  { imageIndex: 12, imageSrc: "../../u-ehon-image/13.jpg" },
-  { imageIndex: 13, imageSrc: "../../u-ehon-image/14.jpg" },
-  { imageIndex: 14, imageSrc: "../../u-ehon-image/15.jpg" },
-  { imageIndex: 15, imageSrc: "../../u-ehon-image/16.jpg" },
-  { imageIndex: 16, imageSrc: "../../u-ehon-image/17.jpg" },
-  { imageIndex: 17, imageSrc: "../../u-ehon-image/18.jpg" },
-  { imageIndex: 18, imageSrc: "../../u-ehon-image/19.jpg" },
-  { imageIndex: 19, imageSrc: "../../u-ehon-image/20.jpg" },
-  { imageIndex: 20, imageSrc: "../../u-ehon-image/21.jpg" },
-  { imageIndex: 21, imageSrc: "../../u-ehon-image/22.jpg" },
-  { imageIndex: 22, imageSrc: "../../u-ehon-image/23.jpg" },
-  { imageIndex: 23, imageSrc: "../../u-ehon-image/24.jpg" },
-  { imageIndex: 24, imageSrc: "../../u-ehon-image/25.jpg" },
-]);
-
-// computed
-const isPcView = computed(() => {
-  return windowSize.value >= 990;
-});
-
 const gridImageClick = (selectedId: number) => {
   selectedImageNumber.value = selectedId;
   if (isPcView.value) {
@@ -117,11 +85,9 @@ const gridImageClick = (selectedId: number) => {
 const changeSelectedImageNumber = (newNumber: number) => {
   selectedImageNumber.value = newNumber;
 };
-
 const changeIsDialogValue = (newDialogVal: boolean) => {
   isDialog.value = newDialogVal;
 };
-
 const changeIsOverlayValue = (newVal: boolean) => {
   isOverlay.value = newVal;
 };
@@ -157,4 +123,5 @@ const changeIsOverlayValue = (newVal: boolean) => {
 //     width: 100vw;
 //   }
 // }
+
 </style>
