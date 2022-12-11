@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, toRef, onMounted } from "vue";
+import { computed, reactive, ref, toRef } from "vue";
 import AppBarMenu from "../components/AppBarMenu.vue";
 import ImageGrid from "../components/ImageGrid.vue";
 import ImageDialogCarousel from "../components/ImageDialogCarousel.vue";
@@ -52,10 +52,10 @@ const imageItemPaths = reactive<object[]>([]);
 
 // computed
 const computePageItems = computed(() => {
-  if (nowEhonName.value === ":u-page") {
+  if (nowEhonName.value === "u-page") {
     imageItemPaths.splice(0);
     createPageItemPaths("u-ehon-image", 24);
-  } else if (nowEhonName.value === ":isi-page") {
+  } else if (nowEhonName.value === "isi-page") {
     imageItemPaths.splice(0);
     createPageItemPaths("isi-ehon-image", 29);
   }

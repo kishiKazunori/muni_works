@@ -46,11 +46,11 @@ const tabLinkItems: any = reactive([
 ]);
 const menuItems: any = reactive([
   {
-    value: "/ehon/:isi-page",
+    value: "/ehon/isi-page",
     name: "「いし。」",
   },
   {
-    value: "/ehon/:u-page",
+    value: "/ehon/u-page",
     name: "「u」",
   },
 ]);

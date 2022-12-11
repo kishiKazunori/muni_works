@@ -45,8 +45,8 @@ const linkContents: LinkItems[] = reactive([
   { title: "about", value: "/about" },
 ]);
 const ehonLinkItems: LinkItems[] = [
-  { title: "u", value: "/ehon/:u-page" },
-  { title: "いし。", value: "/ehon/:isi-page" },
+  { title: "u", value: "/ehon/u-page" },
+  { title: "いし。", value: "/ehon/isi-page" },
 ];
 const drawer = ref(false);
 </script>
