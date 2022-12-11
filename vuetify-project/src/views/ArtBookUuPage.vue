@@ -3,7 +3,7 @@
   <v-main>
     <v-container fluid>
       <div class="d-flex justify-center">
-        <v-row>
+        <v-row :dense="isRowDense">
           <ImageGrid
             v-model:imageGridItems="computePageItems"
             @gridImageClick="gridImageClick"
@@ -23,6 +23,7 @@
             :swiperImageItems="computePageItems"
             :selectedImageNumber="selectedImageNumber"
             @changeIsOverlay="changeIsOverlayValue"
+            @changeIsSwiperShow="closeOverlay"
           />
         </v-row>
       </div>
@@ -31,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, toRef } from "vue";
+import { computed, reactive, ref, toRef, onMounted } from "vue";
 import AppBarMenu from "../components/AppBarMenu.vue";
 import ImageGrid from "../components/ImageGrid.vue";
 import ImageDialogCarousel from "../components/ImageDialogCarousel.vue";
@@ -60,13 +61,17 @@ const computePageItems = computed(() => {
   }
   return imageItemPaths;
 });
+
+const isRowDense = computed(() => {
+  return windowSize.value <= 990;
+});
 const isPcView = computed(() => {
   return windowSize.value >= 990;
 });
 
 // methods
 const createPageItemPaths = (ehonName: string, lastPageIndex: number) => {
-  for (let i = 0; i < lastPageIndex; i++) {
+  for (let i = 0; i < lastPageIndex + 1; i++) {
     // 値が 0 から 4 まで計 5 回実行される
     imageItemPaths.push({
       imageIndex: i,
@@ -89,7 +94,11 @@ const changeIsDialogValue = (newDialogVal: boolean) => {
   isDialog.value = newDialogVal;
 };
 const changeIsOverlayValue = (newVal: boolean) => {
+  console.log(isOverlay.value);
   isOverlay.value = newVal;
+};
+const closeOverlay = () => {
+  isOverlay.value = false;
 };
 </script>
 
@@ -123,5 +132,4 @@ const changeIsOverlayValue = (newVal: boolean) => {
 //     width: 100vw;
 //   }
 // }
-
 </style>
