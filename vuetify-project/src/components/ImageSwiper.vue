@@ -45,11 +45,6 @@ const modules = [Pagination];
 </script>
 
 <style lang="scss">
-.swiper-pagination {
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-}
 .image-close-icon {
   position: absolute;
   right: 0px;
