@@ -10,7 +10,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/ehon/:name',
     name: 'ehon',
     component: () => import('../views/ArtBookPage.vue'),
-    props: true
+    props: true,
   },
   {
     path: '/about',
