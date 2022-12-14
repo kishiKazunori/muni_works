@@ -3,7 +3,7 @@
   <v-main>
     <v-container fluid>
       <div class="d-flex justify-center">
-        <v-row :dense="isRowDense">
+        <v-row :dense="isRowDense" class="d-flex justify-center">
           <ImageGrid
             v-model:imageGridItems="computePageItems"
             @gridImageClick="gridImageClick"
