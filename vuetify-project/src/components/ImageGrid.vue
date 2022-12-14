@@ -21,7 +21,7 @@
   </v-col>
 </template>
 <script setup lang="ts">
-import { computed, onUpdated } from "vue";
+import { computed, onUpdated, onMounted } from "vue";
 import anime from "animejs";
 
 // Props
@@ -48,6 +48,15 @@ const imageSelectedAction = (selectedId: number) =>
   emit("gridImageClick", selectedId);
 
 onUpdated(() => {
+  anime({
+    targets: ".art-book-images",
+    opacity: ["0%", "30%", "60%", "100%"],
+    easing: "easeInQuad",
+    translateY: -5,
+    delay: anime.stagger(200),
+  });
+});
+onMounted(() => {
   anime({
     targets: ".art-book-images",
     opacity: ["0%", "30%", "60%", "100%"],
