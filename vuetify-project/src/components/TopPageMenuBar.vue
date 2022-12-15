@@ -1,6 +1,11 @@
 <template>
   <v-tabs text-h1 height="10vh" v-model="selectedTab" grow class="tabs-style">
-    <v-btn class="align-self-center" width="50vw" variant="text">
+    <v-btn
+      class="align-self-center"
+      width="50vw"
+      variant="text"
+      :to="tabLinkItems[0].value"
+    >
       {{ tabLinkItems[0].name }}
     </v-btn>
     <v-menu>
