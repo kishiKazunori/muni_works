@@ -1,5 +1,8 @@
 <template>
   <v-tabs text-h1 height="10vh" v-model="selectedTab" grow class="tabs-style">
+    <v-btn class="align-self-center" width="50vw" variant="text">
+      {{ tabLinkItems[0].name }}
+    </v-btn>
     <v-menu>
       <template v-slot:activator="{ props }">
         <v-btn
@@ -7,6 +10,7 @@
           height="99%"
           width="50vw"
           v-bind="props"
+          variant="text"
         >
           絵本
           <v-icon end>mdi-menu-down</v-icon>
@@ -23,14 +27,6 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    <v-tab
-      :to="item.value"
-      v-for="item in tabLinkItems"
-      :key="item.name"
-      :value="item"
-    >
-      {{ item.name }}
-    </v-tab>
   </v-tabs>
 </template>
 
