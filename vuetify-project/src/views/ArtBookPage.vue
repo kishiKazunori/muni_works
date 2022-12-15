@@ -2,8 +2,8 @@
   <AppBarMenu />
   <v-main>
     <v-container fluid>
-      <div class="d-flex justify-center">
-        <v-row :dense="isRowDense" class="d-flex justify-center">
+      <div>
+        <v-row :dense="isRowDense">
           <ImageGrid
             v-model:imageGridItems="computePageItems"
             @gridImageClick="gridImageClick"
@@ -58,10 +58,14 @@ const computePageItems = computed(() => {
   } else if (nowEhonName.value === "u-page" && isPcView.value === true) {
     imageItemPaths.splice(0);
     createPageItemPaths("u-ehon-image", 24);
-  } else if (nowEhonName.value === "isi-page") {
+  } else if (nowEhonName.value === "isi-page" && isPcView.value === false) {
+    imageItemPaths.splice(0);
+    createPageItemPaths("isi-ehon-image-mobile", 29);
+  } else if (nowEhonName.value === "isi-page" && isPcView.value === true) {
     imageItemPaths.splice(0);
     createPageItemPaths("isi-ehon-image", 29);
   }
+
   return imageItemPaths;
 });
 
@@ -75,11 +79,11 @@ console.log(isPcView);
 
 // methods
 const createPageItemPaths = (ehonName: string, lastPageIndex: number) => {
+  const format = isPcView.value ? "jpg" : "webp"
   for (let i = 0; i < lastPageIndex + 1; i++) {
-    // 値が 0 から 4 まで計 5 回実行される
     imageItemPaths.push({
       imageIndex: i,
-      imageSrc: `../../${ehonName}/${i + 1}.jpg`,
+      imageSrc: `../../${ehonName}/${i + 1}.${format}`,
     });
   }
 };
