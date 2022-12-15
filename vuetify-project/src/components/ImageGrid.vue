@@ -1,13 +1,5 @@
 <template>
-  <v-progress-circular
-    v-if="changeView"
-    indeterminate
-    model-value="20"
-    :size="93"
-    :width="7"
-  ></v-progress-circular>
   <v-col
-    v-else
     :cols="setColValue"
     v-for="item in imageGridItems"
     :key="item.imageSrc"
@@ -30,48 +22,62 @@ import VLazyImage from "v-lazy-image";
 const props = defineProps<{
   imageGridItems: any;
   ehonName: any;
+  isPcView: boolean;
 }>();
-const changeView = ref(true);
 const setColValue = computed({
   get: () => {
-    if (props.ehonName === "isi-page") {
+    if (props.ehonName === "isi-page" && props.isPcView === true) {
+      return 3;
+    } else if (props.ehonName === "isi-page" && props.isPcView === false) {
       return 4;
-    } else {
+    } else if (props.ehonName === "u-page" && props.isPcView === true) {
+      return 4;
+    } else if (props.ehonName === "u-page" && props.isPcView === false) {
       return 6;
     }
   },
   set: (newNumber) => {},
 });
+console.log(props.isPcView);
 
 const emit = defineEmits<{
   (e: "gridImageClick", val: number): void;
 }>();
 const imageSelectedAction = (selectedId: number) =>
   emit("gridImageClick", selectedId);
-
-onMounted(() => {
-  changeView.value = false;
-});
 </script>
 
-<style scoped>
-.art-book-images {
-  align-self: center;
-  max-width: 450px;
-  height: 100%;
-  width: 100%;
-}
-.art-book-images::placeholder {
-  border: solid;
-}
+<style lang="scss" scoped>
 .v-lazy-image {
   opacity: 0;
   transition: opacity 2s;
 }
-.v-lazy-image-load {
-  border: 1px solid;
-}
 .v-lazy-image-loaded {
   opacity: 1;
+}
+
+// PC
+@media all and (max-width: 2000px) {
+  .art-book-images {
+    align-self: center;
+    height: 100%;
+    width: 100%;
+  }
+}
+// tablet
+@media screen and (max-width: 767px) {
+  .art-book-images {
+    align-self: center;
+    height: 100%;
+    width: 100%;
+  }
+}
+// mobile
+@media screen and (max-width: 479px) {
+  .art-book-images {
+    align-self: center;
+    height: 100%;
+    width: 100%;
+  }
 }
 </style>
