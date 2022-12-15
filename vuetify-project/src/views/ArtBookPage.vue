@@ -52,7 +52,10 @@ const imageItemPaths = reactive<object[]>([]);
 
 // computed
 const computePageItems = computed(() => {
-  if (nowEhonName.value === "u-page") {
+  if (nowEhonName.value === "u-page" && isPcView.value === true) {
+    imageItemPaths.splice(0);
+    createPageItemPaths("u-ehon-image-mobile", 24);
+  } else if (nowEhonName.value === "u-page" && isPcView.value === false) {
     imageItemPaths.splice(0);
     createPageItemPaths("u-ehon-image", 24);
   } else if (nowEhonName.value === "isi-page") {
