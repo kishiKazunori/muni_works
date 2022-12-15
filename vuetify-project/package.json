@@ -10,6 +10,7 @@
   "dependencies": {
     "@mdi/font": "7.0.96",
     "roboto-fontface": "*",
+    "v-lazy-image": "^2.1.1",
     "vue": "^3.2.38",
     "vue-router": "4",
     "vuetify": "^3.0.0",
