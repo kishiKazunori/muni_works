@@ -1,28 +1,34 @@
 <template>
   <v-col
     :cols="setColValue"
-    class="d-flex child-flex"
     v-for="item in imageGridItems"
     :key="item.imageSrc"
+    justify="center"
+    align="center"
   >
-    <v-img
+    <v-lazy-image
+      justify="center"
+      :src="item.imageSrc"
+      class="art-book-images"
+      @click="imageSelectedAction(item.imageIndex)"
+    ></v-lazy-image>
+    <!-- <v-img
       @click="imageSelectedAction(item.imageIndex)"
       :src="item.imageSrc"
       class="bg-grey-lighten-2 art-book-images"
       cover
-    >
-      <template v-slot:placeholder>
-        <v-row class="fill-height ma-0" align="center" justify="center">
-          <v-progress-circular indeterminate color="grey-lighten-5">
-          </v-progress-circular>
-        </v-row>
-      </template>
-    </v-img>
+    > 
+    <template v-slot:placeholder>
+      <v-row class="fill-height ma-0" align="center" justify="center">
+        <v-progress-circular indeterminate color="grey-lighten-5">
+        </v-progress-circular>
+      </v-row>
+    </template> -->
   </v-col>
 </template>
 <script setup lang="ts">
 import { computed, onUpdated, onMounted } from "vue";
-import anime from "animejs";
+import VLazyImage from "v-lazy-image";
 
 // Props
 const props = defineProps<{
@@ -35,7 +41,7 @@ const setColValue = computed({
     if (props.ehonName === ":isi-page") {
       return 3;
     } else {
-      return 4;
+      return 5;
     }
   },
   set: (newNumber) => {},
@@ -46,23 +52,19 @@ const emit = defineEmits<{
 }>();
 const imageSelectedAction = (selectedId: number) =>
   emit("gridImageClick", selectedId);
-
-onUpdated(() => {
-  anime({
-    targets: ".art-book-images",
-    opacity: ["0%", "30%", "60%", "100%"],
-    easing: "easeInQuad",
-    translateY: -5,
-    delay: anime.stagger(200),
-  });
-});
-onMounted(() => {
-  anime({
-    targets: ".art-book-images",
-    opacity: ["0%", "30%", "60%", "100%"],
-    easing: "easeInQuad",
-    translateY: -5,
-    delay: anime.stagger(200),
-  });
-});
 </script>
+
+<style scoped>
+.art-book-images {
+  align-self: center;
+  max-width: 450px;
+  width: 100%;
+}
+.v-lazy-image {
+  opacity: 0;
+  transition: opacity 2s;
+}
+.v-lazy-image-loaded {
+  opacity: 1;
+}
+</style>
