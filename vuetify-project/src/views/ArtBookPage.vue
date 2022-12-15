@@ -3,11 +3,12 @@
   <v-main>
     <v-container fluid>
       <div>
-        <v-row :dense="isRowDense">
+        <v-row :dense="isRowDense" justify="center" align="center">
           <ImageGrid
             v-model:imageGridItems="computePageItems"
             @gridImageClick="gridImageClick"
             :ehonName="nowEhonName"
+            :isPcView="isPcView"
           />
           <ImageDialogCarousel
             v-if="isPcView"
@@ -75,11 +76,10 @@ const isRowDense = computed(() => {
 const isPcView = computed(() => {
   return windowSize.value >= 990;
 });
-console.log(isPcView);
 
 // methods
 const createPageItemPaths = (ehonName: string, lastPageIndex: number) => {
-  const format = isPcView.value ? "jpg" : "webp"
+  const format = isPcView.value ? "jpg" : "webp";
   for (let i = 0; i < lastPageIndex + 1; i++) {
     imageItemPaths.push({
       imageIndex: i,
