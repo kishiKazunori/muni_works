@@ -2,8 +2,8 @@
   <v-app class="container">
     <v-main>
       <div class="top-page-fade-animation">
-        <HomeImg />
         <LogoText transition="scroll-x-transition" class="logo-text-position" />
+        <HomeImg />
         <TopPageMenuBar />
       </div>
     </v-main>
