@@ -10,7 +10,7 @@
 
 <style  lang="scss" scoped>
 .home-image {
-    background: url("/u-ehon-image/home-main-img.png");
+    background: url("/main-image/topImage.jpg");
     background-size: cover;
     background-position: center center;
     width: 100vw;
