@@ -30,6 +30,7 @@
       </div>
     </v-container>
   </v-main>
+  <PageFooter />
 </template>
 
 <script setup lang="ts">
@@ -38,7 +39,7 @@ import AppBarMenu from "../components/AppBarMenu.vue";
 import ImageGrid from "../components/ImageGrid.vue";
 import ImageDialogCarousel from "../components/ImageDialogCarousel.vue";
 import ImageOverlay from "../components/ImageOverlay.vue";
-
+import PageFooter from "../components/PageFooter.vue";
 const props = defineProps({
   name: String,
 });

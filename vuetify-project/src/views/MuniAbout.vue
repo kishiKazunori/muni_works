@@ -36,11 +36,13 @@
       </v-container>
     </v-main>
   </div>
+  <PageFooter />
 </template>
 
 <script setup lang="ts">
 import { onMounted } from "vue";
 import AppBarMenu from "../components/AppBarMenu.vue";
+import PageFooter from "../components/PageFooter.vue";
 import anime from "animejs";
 onMounted(() => {
   anime({
@@ -52,7 +54,7 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
 .fade-enter-active,
 .fade-leave-active {
   will-change: opacity;
@@ -62,4 +64,5 @@ onMounted(() => {
 .fade-leave-to {
   opacity: 0;
 }
+
 </style>
