@@ -5,10 +5,3 @@
     </div>
   </v-footer>
 </template>
-
-<script>
-</script>
-
-<style>
-
-</style>
