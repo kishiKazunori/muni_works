@@ -10,10 +10,10 @@
 
 <style  lang="scss" scoped>
 .home-image {
-    background: url("/main-image/topImage.jpg");
+    background: url("/main-image/topImage.webp");
     background-size: cover;
     background-position: center center;
     width: 100vw;
-    height: 80vh;
+    height: 70vh;
 }
 </style>
