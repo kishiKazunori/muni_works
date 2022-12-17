@@ -38,8 +38,6 @@ const setColValue = computed({
   },
   set: (newNumber) => {},
 });
-console.log(props.isPcView);
-
 const emit = defineEmits<{
   (e: "gridImageClick", val: number): void;
 }>();
