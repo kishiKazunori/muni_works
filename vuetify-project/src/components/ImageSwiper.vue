@@ -9,7 +9,17 @@
     style="color: #fff"
   >
     <swiper-slide v-for="(item, i) in swiperImageItems" :key="i">
-      <v-img :src="item.imageSrc"></v-img>
+      <v-img :src="item.imageSrc">
+        <template v-slot:placeholder>
+          <div class="d-flex align-center justify-center fill-height">
+            <v-progress-circular
+              indeterminate
+              color="grey-lighten-4"
+            ></v-progress-circular>
+          </div>
+        </template>
+        ></v-img
+      >
     </swiper-slide>
   </swiper>
 </template>
