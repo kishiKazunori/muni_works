@@ -1,20 +1,25 @@
 <template>
-  <v-dialog close-delay="3" v-model="isDialogShow" height="85vh" eager>
-    <v-card>
-      <v-carousel
-        v-model="nowPage"
-        height="85vh"
-        show-arrows="hover"
-        hide-delimiters
-      >
-        <v-carousel-item
-          v-for="item in carouselImageItem"
-          :key="item.imageIndex"
-        >
-          <v-img :src="item.imageSrc"></v-img>
-        </v-carousel-item>
-      </v-carousel>
-    </v-card>
+  <v-dialog
+    close-delay="3"
+    v-model="isDialogShow"
+    height="auto"
+    max-width="1000"
+    eager
+    transition="dialog-fade-transition"
+    class="d-flax"
+  >
+    <v-btn @click="closeDialog" width="100" max-width="110" class="float-right">Close</v-btn>
+    <v-carousel
+      v-model="nowPage"
+      height="750"
+      max-width="800"
+      show-arrows="hover"
+      hide-delimiters
+    >
+      <v-carousel-item v-for="item in carouselImageItem" :key="item.imageIndex">
+        <v-img :src="item.imageSrc" height="750"></v-img>
+      </v-carousel-item>
+    </v-carousel>
   </v-dialog>
 </template>
 
@@ -48,6 +53,10 @@ const isDialogShow = computed({
     emit("outsideDialogClick", newDialogVal);
   },
 });
+
+const closeDialog = () => {
+  isDialogShow.value = false;
+};
 </script>
 <style lang="scss" scoped>
 // .v-dialog .v-overlay__content > .v-card {
