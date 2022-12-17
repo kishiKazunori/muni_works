@@ -61,17 +61,17 @@ const closeButtonClick = () => {
 //     top: 0;
 // }
 
-// PC
+// // tablet => PC
 @media screen and (max-width: 979px) {
   .mobile-image-slider {
-    width: 60vw;
+    width: 86vw;
     height: 80%;
   }
 }
-// tablet
+// mobile => tablet
 @media screen and (max-width: 767px) {
   .mobile-image-slider {
-    width: 55vw;
+    width: 68vw;
     height: 80%;
   }
 }
