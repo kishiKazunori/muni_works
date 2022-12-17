@@ -29,7 +29,7 @@ onMounted(() => {
 <style lang="scss">
 .logo-text-position {
   position: absolute;
-  top: 30vw;
+  top: 25vw;
   left: 10vh;
 }
 </style>
