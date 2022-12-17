@@ -2,7 +2,6 @@
   <swiper
     :slides-per-view="1"
     :space-between="15"
-    :lazy="{ loadPrevNext: true, loadPrevNextAmount: 2 }"
     :initialSlide="selectedImageNumber"
     :pagination="myPaginationStyle"
     :modules="modules"
@@ -13,7 +12,6 @@
     <swiper-slide v-for="(item, i) in swiperImageItems" :key="i">
       <v-img
         :src="item.imageSrc"
-        class="swiper-lazy"
       >
         <template v-slot:placeholder>
           <div class="d-flex align-center justify-center fill-height">
