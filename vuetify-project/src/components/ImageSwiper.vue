@@ -9,7 +9,7 @@
     style="color: #fff"
   >
     <swiper-slide v-for="(item, i) in swiperImageItems" :key="i">
-      <v-img >
+      <v-img :src="item.imageSrc">
         <template v-slot:placeholder>
           <div class="d-flex align-center justify-center fill-height">
             <v-progress-circular
@@ -39,6 +39,8 @@ const props = defineProps<{
 const myPaginationStyle = {
   clickable: true,
   PaginationOptions: { type: "fraction" },
+  loadPrevNext: true,
+  loadPrevNextAmount: 2
 };
 const modules = [Pagination];
 
