@@ -17,6 +17,8 @@ import TopPageMenuBar from "../components/TopPageMenuBar.vue";
 import { onMounted } from "vue";
 import anime from "animejs";
 onMounted(() => {
+  console.log(import.meta.env.VITE_APP_TITLE);
+  
   anime({
     targets: ".top-page-fade-animation",
     opacity: [0, 1],
