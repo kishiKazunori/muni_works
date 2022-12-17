@@ -4,6 +4,7 @@
       <ImageSwiper
         :swiperImageItems="swiperImageItems"
         :selectedImageNumber="selectedImageNumber"
+        :windowSize="windowSize"
       />
     </div>
     <v-btn @click="closeButtonClick" class="close-button" variant="text">
@@ -21,6 +22,7 @@ const props = defineProps<{
   isOverlay: boolean;
   swiperImageItems: any;
   selectedImageNumber: number;
+  windowSize: number;
 }>();
 const emit = defineEmits<{
   (e: "changeIsOverlay", val: boolean): void;

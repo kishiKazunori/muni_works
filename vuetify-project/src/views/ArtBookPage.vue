@@ -20,6 +20,7 @@
           />
           <ImageOverlay
             v-else
+            :windowSize="windowSize"
             :isOverlay="isOverlay"
             :swiperImageItems="computePageItems"
             :selectedImageNumber="selectedImageNumber"

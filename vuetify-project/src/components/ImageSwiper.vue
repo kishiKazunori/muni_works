@@ -2,14 +2,19 @@
   <swiper
     :slides-per-view="1"
     :space-between="15"
-    :loop="true"
+    :lazy="{ loadPrevNext: true, loadPrevNextAmount: 2 }"
     :initialSlide="selectedImageNumber"
     :pagination="myPaginationStyle"
     :modules="modules"
+    @tap="tapEvent"
+    @swiper="setSwiperRef"
     style="color: #fff"
   >
     <swiper-slide v-for="(item, i) in swiperImageItems" :key="i">
-      <v-img :src="item.imageSrc">
+      <v-img
+        :src="item.imageSrc"
+        class="swiper-lazy"
+      >
         <template v-slot:placeholder>
           <div class="d-flex align-center justify-center fill-height">
             <v-progress-circular
@@ -26,6 +31,7 @@
 <script setup lang="ts">
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination } from "swiper";
+import { ref } from "vue";
 import "swiper/css";
 // import "swiper/css/pagination";
 
@@ -33,16 +39,33 @@ import "swiper/css";
 const props = defineProps<{
   swiperImageItems: any;
   selectedImageNumber: number;
+  windowSize: number;
 }>();
 
 // data
 const myPaginationStyle = {
   clickable: true,
   PaginationOptions: { type: "fraction" },
-  lazy: { loadPrevNext: true, loadPrevNextAmount: 2 },
 };
 const modules = [Pagination];
+let swiperRef: any = null;
 
+// methods
+const setSwiperRef = (swiper: object) => {
+  swiperRef = swiper;
+};
+const tapEvent = (imageTarget: any) => {
+  let nowIndex = swiperRef.realIndex;
+  const windowCenter = props.windowSize / 2;
+  const toucheImageX = imageTarget.touches.currentX;
+  if (swiperRef !== null) {
+    if (windowCenter <= toucheImageX) {
+      swiperRef.slideTo(nowIndex + 1);
+    } else if (windowCenter > toucheImageX) {
+      swiperRef.slideTo(nowIndex - 1);
+    }
+  }
+};
 // methods
 // const onSwiper = (swiper: any) => {
 //   console.log(swiper.value);
