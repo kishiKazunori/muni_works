@@ -39,8 +39,7 @@ const props = defineProps<{
 const myPaginationStyle = {
   clickable: true,
   PaginationOptions: { type: "fraction" },
-  loadPrevNext: true,
-  loadPrevNextAmount: 2
+  lazy: { loadPrevNext: true, loadPrevNextAmount: 2 },
 };
 const modules = [Pagination];
 
