@@ -71,7 +71,7 @@ const closeButtonClick = () => {
 // mobile => tablet
 @media screen and (max-width: 767px) {
   .mobile-image-slider {
-    width: 68vw;
+    width: 65vw;
     height: 80%;
   }
 }
