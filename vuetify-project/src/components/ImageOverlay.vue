@@ -1,14 +1,14 @@
 <template>
   <v-overlay v-model="isOverlayShow" class="d-flex align-center justify-center">
     <div class="mobile-image-slider">
-      <!-- <v-btn @click="closeButtonClick">
-        <v-icon class="image-close-icon"> mdi-close-circle-outline</v-icon>
-      </v-btn> -->
       <ImageSwiper
         :swiperImageItems="swiperImageItems"
         :selectedImageNumber="selectedImageNumber"
       />
     </div>
+    <v-btn @click="closeButtonClick" class="close-button" variant="text">
+      <v-icon icon="mdi-close" color="white" size="x-large"></v-icon>
+    </v-btn>
   </v-overlay>
 </template>
 
@@ -32,8 +32,14 @@ const isOverlayShow = computed({
     emit("changeIsOverlay", newOverlayVal);
   },
 });
+const closeButtonClick = () => {
+  isOverlayShow.value = false;
+};
 </script>
 <style lang="scss" scoped>
+.close-button {
+  width: 100%;
+}
 // .prev-button{
 //     background-color:rgba(0,0,0,0);
 //     border: none !important;
