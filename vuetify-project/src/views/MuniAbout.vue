@@ -5,7 +5,7 @@
       <v-container fluid>
         <v-card class="mx-auto" max-width="500" variant="outlined">
           <v-img
-            src="./main-image/1.jpg"
+            src="./main-image/aboutImage.webp"
             class="text-white"
           ></v-img>
           <v-card-item>
