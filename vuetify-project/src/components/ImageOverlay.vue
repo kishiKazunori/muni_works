@@ -1,15 +1,21 @@
 <template>
   <v-overlay v-model="isOverlayShow" class="d-flex align-center justify-center">
-    <div class="mobile-image-slider">
-      <ImageSwiper
-        :swiperImageItems="swiperImageItems"
-        :selectedImageNumber="selectedImageNumber"
-        :windowSize="windowSize"
-      />
-    </div>
-    <v-btn @click="closeButtonClick" class="close-button" variant="text">
-      <v-icon icon="mdi-close" color="white" size="x-large"></v-icon>
-    </v-btn>
+    <v-row no-gutters>
+      <v-col>
+        <div :class="swiperClass">
+          <ImageSwiper
+            :swiperImageItems="swiperImageItems"
+            :selectedImageNumber="selectedImageNumber"
+            :windowSize="windowSize"
+          />
+        </div>
+      </v-col>
+      <v-col>
+        <v-btn @click="closeButtonClick" class="close-button" variant="text">
+          <v-icon icon="mdi-close" color="white" size="x-large"></v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
   </v-overlay>
 </template>
 
@@ -23,10 +29,19 @@ const props = defineProps<{
   swiperImageItems: any;
   selectedImageNumber: number;
   windowSize: number;
+  nowEhonName: any;
 }>();
 const emit = defineEmits<{
   (e: "changeIsOverlay", val: boolean): void;
 }>();
+
+const swiperClass = computed(() => {
+  if (props.nowEhonName === "u-page") {
+    return "u-ehon-style";
+  } else if (props.nowEhonName === "isi-page") {
+    return "isi-ehon-style";
+  }
+});
 
 const isOverlayShow = computed({
   get: () => props.isOverlay,
@@ -39,9 +54,6 @@ const closeButtonClick = () => {
 };
 </script>
 <style lang="scss" scoped>
-.close-button {
-  width: 100%;
-}
 // .prev-button{
 //     background-color:rgba(0,0,0,0);
 //     border: none !important;
@@ -61,31 +73,56 @@ const closeButtonClick = () => {
 //     top: 0;
 // }
 
-// // tablet => PC
-@media screen and (max-width: 979px) {
-  .mobile-image-slider {
-    width: 86vw;
-    height: 80%;
+// PC
+@media screen and (min-width: 769px) and (max-width: 979px) {
+  .u-ehon-style {
+    width: 80vw;
+    margin-left: 1rem;
+  }
+  .isi-ehon-style {
+    width: 80vw;
+    margin-left: 1rem;
+  }
+  .close-button {
+    max-width: 20px;
   }
 }
-// mobile => tablet
-@media screen and (max-width: 767px) {
-  .mobile-image-slider {
+// tablet
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  .u-ehon-style {
+    width: 100vw;
+  }
+  .isi-ehon-style {
+    width: 100vw;
+  }
+  .close-button {
+    width: 100vw;
+  }
+}
+// 横向きmobile
+@media (orientation: landscape) and (max-width: 767px) {
+  .u-ehon-style {
     width: 65vw;
-    height: 80%;
+    margin-left: 1rem;
+  }
+  .isi-ehon-style {
+    width: 48vw;
+    margin-left: 1rem;
+  }
+  .close-button {
+    max-width: 20px;
   }
 }
 // mobile
 @media screen and (max-width: 479px) {
-  .mobile-image-slider {
+  .u-ehon-style {
     width: 100vw;
-    height: auto;
   }
-}
-.image-close-icon {
-  position: absolute;
-  right: 0px;
-  top: -30px;
-  z-index: 99;
+  .isi-ehon-style {
+    width: 100vw;
+  }
+  .close-button {
+    width: 100%;
+  }
 }
 </style>

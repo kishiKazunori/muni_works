@@ -21,6 +21,7 @@
           <ImageOverlay
             v-else
             :windowSize="windowSize"
+            :nowEhonName="nowEhonName"
             :isOverlay="isOverlay"
             :swiperImageItems="computePageItems"
             :selectedImageNumber="selectedImageNumber"
