@@ -7,12 +7,14 @@
         <TopPageMenuBar />
       </div>
     </v-main>
+    <PageFooter />
   </v-app>
 </template>
 
 <script setup lang="ts">
 import HomeImg from "../components/HomeImg.vue";
 import LogoText from "../components/LogoText.vue";
+import PageFooter from "../components/PageFooter.vue";
 import TopPageMenuBar from "../components/TopPageMenuBar.vue";
 import { onMounted } from "vue";
 import anime from "animejs";
