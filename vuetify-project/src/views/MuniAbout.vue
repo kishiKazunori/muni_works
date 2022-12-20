@@ -2,13 +2,9 @@
   <AppBarMenu />
   <div class="about-page-fade">
     <v-sheet>
-      <v-main >
+      <v-main>
         <v-container fluid>
-          <v-card
-            class="mx-auto"
-            max-width="500"
-            variant="outlined"
-          >
+          <v-card class="mx-auto" max-width="500" variant="outlined">
             <v-img
               src="./main-image/aboutImage.webp"
               class="text-white"
@@ -23,6 +19,10 @@
                 </div>
                 <div class="text-caption">
                   テーマ：自然、生き物、縄文土器、言語、遊び。
+                </div>
+                <div class="text-caption">
+                  <v-icon icon="mdi-email"></v-icon>
+                  musubi.muni@gmail.com
                 </div>
               </div>
             </v-card-item>
@@ -70,7 +70,7 @@ onMounted(() => {
 .fade-leave-to {
   opacity: 0;
 }
-.about-page-fade{
+.about-page-fade {
   display: flex;
   justify-content: center;
 }
