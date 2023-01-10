@@ -18,7 +18,8 @@
                   28歳、栃木市出身、東京都在住
                 </div>
                 <div class="text-caption">
-                  テーマ：自然、生き物、縄文土器、言語、遊び。
+                  テーマ：宇宙、星、自然、生き物、言語、<br>
+                  縄文土器、遊び。
                 </div>
                 <div class="text-caption">
                   <v-icon icon="mdi-email"></v-icon>
