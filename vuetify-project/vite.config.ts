@@ -6,10 +6,12 @@ import vuetify from 'vite-plugin-vuetify'
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 import { VitePluginFonts } from 'vite-plugin-fonts' // 追加
+import purgecss from "@fullhuman/postcss-purgecss";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/github-pages-test/' : './',
+  // base: process.env.NODE_ENV === 'production' ? '/vuetify-project/' : './',
+  // base: process.env.NODE_ENV === 'production' ? './' : './',
   plugins: [
     vue(),
     VitePluginFonts({
@@ -24,6 +26,17 @@ export default defineConfig({
       autoImport: true,
     }),
   ],
+  // css: {
+  //   postcss: {
+  //     plugins: [
+  //       purgecss({
+  //         content: ["dist/*.html", "dist/assets/*.js"],
+  //         css: ["dist/assets/*.css"],
+  //         safelist: [/filepond-*/],
+  //       }),
+  //     ],
+  //   },
+  // },
   define: { 'process.env': {} },
   resolve: {
     alias: {

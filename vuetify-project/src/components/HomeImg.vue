@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid ma-0 pa-0 fill-height class="home-hero__content">
+    <v-container fluid fill-height class="home-image">
     </v-container>
 </template>
 
@@ -9,14 +9,23 @@
 
 
 <style  lang="scss" scoped>
-.home-hero__content {
-    background: url("/u-ehon-image/home-main-img.png");
+.home-image {
+    background: url("/main-image/topImage.webp");
     background-size: cover;
     background-position: center center;
+    animation-duration: 1s;
     width: 100vw;
-    height: 80vh;
-    &-text {
-        font-size: 100px;
-    }
+    height: 75vh;
+    animation-name: animation;
+}
+
+@keyframes animation{
+  /*1秒かけてwidth: 50%;→width: 100%;になる動きを記述*/
+  0%{
+    height: 55vh;
+  }
+  100%{
+    height: 75vh;
+  }
 }
 </style>

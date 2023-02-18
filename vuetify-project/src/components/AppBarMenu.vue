@@ -1,53 +1,64 @@
 <template>
-    <v-card class="mx-auto overflow-hidden" height="100">
-        <v-app-bar>
-            <v-app-bar-title-button>
-                <v-btn class="app-bar-title-button">muni work u</v-btn>
-            </v-app-bar-title-button>
-            <v-spacer></v-spacer>
-            <v-btn :to="content.value" v-for="content in contents" :key="content.value">
-                <span class="app-bar-button">{{ content.name }}</span>
-            </v-btn>
-        </v-app-bar>
-    </v-card>
+  <v-app-bar prominent>
+    <v-app-bar-title class="app-bar-title"> 
+      <v-btn class="pa-0 text-h5" link to="/">muni works</v-btn>
+    </v-app-bar-title>
+    <template v-slot:append>
+      <v-app-bar-nav-icon
+        variant="text"
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
+    </template>
+  </v-app-bar>
+  <v-navigation-drawer app dark v-model="drawer" location="right">
+    <v-list class="nav-list-item-style">
+      <v-list-item 
+        v-for="link in linkContents"
+        :key="link.title"
+        :title="link.title"
+        :to="link.value"
+      ></v-list-item>
+      <v-list-group value="ehon">
+        <template v-slot:activator="{ props }">
+          <v-list-item v-bind="props" title="絵本"></v-list-item>
+        </template>
+        <v-list-item
+          v-for="ehonLink in ehonLinkItems"
+          :key="ehonLink.title"
+          :title="ehonLink.title"
+          :to="ehonLink.value"
+        ></v-list-item>
+      </v-list-group>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
-
-<script lang="ts">
-import { defineComponent, ref } from "vue";
-export default defineComponent({
-    name: "AppBarMenu",
-    setup() {
-        const contents = ref([
-            { name: "TOP", value: "/" },
-            { name: "いし。", value: "/isiPage" },
-            { name: "about", value: "/about" }
-        ])
-        return {
-            contents
-        }
-    }
-
-})
+<script setup lang="ts">
+import { reactive, ref } from "vue";
+import TopPageMenuBar from "../components/TopPageMenuBar.vue";
+interface LinkItems {
+  title: string;
+  value: string;
+}
+const linkContents: LinkItems[] = reactive([
+  { title: "TOP", value: "/" },
+  { title: "about", value: "/about" },
+]);
+const ehonLinkItems: LinkItems[] = [
+  { title: "u", value: "/ehon/u-page" },
+  { title: "いし。", value: "/ehon/isi-page" },
+];
+const drawer = ref(false);
 </script>
 
 <style lang="scss" scoped>
-.app-bar-button {
-    font-size: 1.5em;
-    font-family: 'Zen Old Mincho', sans-serif;
+.nav-list-item-style {
+  font-family: "Zen Old Mincho", sans-serif;
+  
 }
-
-.app-bar-title-button {
-    font-size: 2em;
-}
-
 @media screen and (max-width: 767px) {
-    .app-bar-button {
-        font-size: 0.7em;
-    }
-
-    .app-bar-title-button {
-        font-size: 0.7em;
-    }
 }
+// .v-toolbar-title__placeholder {
+//   overflow: initial !important;
+// }
 </style>
