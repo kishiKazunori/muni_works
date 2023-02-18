@@ -25,6 +25,5 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "vite.config.ts",
-    "node_modules/@types"
   ]
 }
